@@ -96,7 +96,7 @@ exclude_also = [
 # (audit P11-N2).  kit_onnx binds only stdlib + mlopt-core +
 # mlopt-dtypes + onnx/onnxruntime/numpy at module level — the
 # torch/mlopt_torch/kit_carriers/mlopt_orchestrator/mlopt_host_tensor/
-# mlopt_cuda family is forbidden outright.  torch appears only in
+# kit_cuda family is forbidden outright.  torch appears only in
 # tests/ (one opmap parity check), which is outside
 # ``root_packages``; ``include_external_packages`` makes the
 # third-party binds (torch, onnxruntime) visible to the contract.
@@ -114,5 +114,5 @@ forbidden_modules = [
     "kit_carriers",
     "mlopt_orchestrator",
     "mlopt_host_tensor",
-    "mlopt_cuda",
+    "kit_cuda",
 ]
