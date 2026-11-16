@@ -32,8 +32,8 @@ dev = [
 # resolve `mlopt-core`/`mlopt-dtypes` through their own
 # `[tool.uv.sources]` (uv honours sources only at the workspace root).
 [tool.uv.sources]
-mlopt-core = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-core", tag = "v0.1.9" }
-mlopt-dtypes = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-dtypes", tag = "v0.1.9" }
+mlopt-core = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-core", tag = "v0.1.10" }
+mlopt-dtypes = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-dtypes", tag = "v0.1.10" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
