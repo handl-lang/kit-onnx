@@ -32,8 +32,8 @@ dev = [
 # resolve `mlopt-core`/`mlopt-dtypes` through their own
 # `[tool.uv.sources]` (uv honours sources only at the workspace root).
 [tool.uv.sources]
-mlopt-core = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-core", tag = "v0.1.8" }
-mlopt-dtypes = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-dtypes", tag = "v0.1.8" }
+mlopt-core = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-core", tag = "v0.1.9" }
+mlopt-dtypes = { git = "https://github.com/handl-lang/eqsat.git", subdirectory = "packages/mlopt-dtypes", tag = "v0.1.9" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -95,7 +95,7 @@ exclude_also = [
 # import-linter: the "leaf by contract" layering, statically
 # (audit P11-N2).  kit_onnx binds only stdlib + mlopt-core +
 # mlopt-dtypes + onnx/onnxruntime/numpy at module level — the
-# torch/mlopt_torch/mlopt_carriers/mlopt_orchestrator/mlopt_host_tensor/
+# torch/mlopt_torch/kit_carriers/mlopt_orchestrator/mlopt_host_tensor/
 # mlopt_cuda family is forbidden outright.  torch appears only in
 # tests/ (one opmap parity check), which is outside
 # ``root_packages``; ``include_external_packages`` makes the
@@ -111,7 +111,7 @@ source_modules = ["kit_onnx"]
 forbidden_modules = [
     "torch",
     "mlopt_torch",
-    "mlopt_carriers",
+    "kit_carriers",
     "mlopt_orchestrator",
     "mlopt_host_tensor",
     "mlopt_cuda",

@@ -11,7 +11,7 @@ to IR — every path verified through onnxruntime.
 
 It is a **leaf**: it depends on `mlopt-core` + `mlopt-dtypes`
 (handl-lang/eqsat) and the external `onnx`/`onnxruntime`/`numpy`
-stack — no torch, no `mlopt_torch`, no `mlopt_carriers`, no
+stack — no torch, no `mlopt_torch`, no `kit_carriers`, no
 `mlopt_orchestrator`.
 
 ## Install
