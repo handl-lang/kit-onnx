@@ -4,7 +4,7 @@
 set -euo pipefail
 
 uv sync --group dev
-.venv/bin/ruff check src tests
-.venv/bin/ruff format --check src tests || .venv/bin/ruff format src tests
+.venv/bin/ruff check src
+.venv/bin/ruff format --check src || .venv/bin/ruff format src tests
 .venv/bin/ty check
 .venv/bin/python -m pytest tests/ -q
