@@ -4,8 +4,8 @@ The first non-torch backend, now complete.  ``OnnxSink`` implements
 ``mlopt_core.ports.Sink`` (direction 1: IR -> ONNX, verified through
 ``onnxruntime``); ``OnnxSource`` implements
 ``mlopt_core.ports.Source`` (direction 2: ONNX graph -> IR, over
-:mod:`mlopt_onnx.liftmap` — the inverse op vocabulary of the sink's
-:mod:`mlopt_onnx.opmap`).  Together they close the loop the ADR
+:mod:`kit_onnx.liftmap` — the inverse op vocabulary of the sink's
+:mod:`kit_onnx.opmap`).  Together they close the loop the ADR
 staged: ONNX models enter the optimizer untouched by torch, and
 optimized programs leave for any ONNX runtime.
 
@@ -15,7 +15,7 @@ The port boundary is what is under test, so the honest reading is
 that the code here is half the deliverable and the answer to "did
 core have to move?" is the other half.
 
-    >>> from mlopt_onnx import OnnxSink, OnnxSource
+    >>> from kit_onnx import OnnxSink, OnnxSource
     >>> source = OnnxSource()                # doctest: +SKIP
     >>> ir, leaves = source.to_ir(model)     # doctest: +SKIP
     >>> sink = OnnxSink(dtype="float64",
@@ -30,30 +30,30 @@ one, reachable through the same ports and depending only on
 
 from __future__ import annotations
 
-from mlopt_onnx.arrays import (
+from kit_onnx.arrays import (
     ONNX_TYPE_NAMES,
     WORKING_DTYPES,
     numpy_to_onnx_type,
     to_numpy,
 )
-from mlopt_onnx.errors import (
+from kit_onnx.errors import (
     OnnxImportError,
     OnnxLoweringError,
     UnsupportedOnnxOpError,
 )
-from mlopt_onnx.executor import OnnxExecutor
-from mlopt_onnx.lift import GraphLifter, LiftResult, lift_model
-from mlopt_onnx.liftmap import ONNX_LIFTS
-from mlopt_onnx.lower import GraphBuilder, lower_ir
-from mlopt_onnx.opmap import ONNX_BINDINGS
-from mlopt_onnx.report import (
+from kit_onnx.executor import OnnxExecutor
+from kit_onnx.lift import GraphLifter, LiftResult, lift_model
+from kit_onnx.liftmap import ONNX_LIFTS
+from kit_onnx.lower import GraphBuilder, lower_ir
+from kit_onnx.opmap import ONNX_BINDINGS
+from kit_onnx.report import (
     REL_FLOOR,
     OnnxVerifyReport,
     verify_equiv,
     verify_module,
 )
-from mlopt_onnx.sink import OnnxSink
-from mlopt_onnx.source import MAX_OPSET, MIN_OPSET, OnnxSource
+from kit_onnx.sink import OnnxSink
+from kit_onnx.source import MAX_OPSET, MIN_OPSET, OnnxSource
 
 __all__ = [
     "MAX_OPSET",
@@ -87,7 +87,7 @@ def register() -> None:
     """Seat the ONNX backend on ``mlopt_core.backends.DEFAULT_REGISTRY``.
 
     Explicit seam — importing this package registers nothing; call
-    ``mlopt_onnx.register()`` at the entry point (the same pattern as
+    ``kit_onnx.register()`` at the entry point (the same pattern as
     ``mlopt_kernel.play.register()``).  Registers ``"onnx"`` with
     :class:`OnnxSource` as the source and ``OnnxSink`` as the ``"onnx"``
     target — both lazy factories, resolved on demand.  ONNX has no

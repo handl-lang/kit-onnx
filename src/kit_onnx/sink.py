@@ -3,7 +3,7 @@
 ADR 0006's first stage: a *second* backend behind the port the torch
 adapter already implements.  The sink declares its op surface
 (:attr:`OnnxSink.supported_ops`), lowers an IR to an
-:class:`~mlopt_onnx.executor.OnnxExecutor`, and verifies two lowered
+:class:`~kit_onnx.executor.OnnxExecutor`, and verifies two lowered
 programs against each other in its own runtime.
 
 What this module does *not* do is as important as what it does.  It
@@ -25,11 +25,11 @@ from mlopt_core.ir import IR
 from mlopt_core.ops import OpTable
 from mlopt_core.ports import Executor, ExecutorSpec, OpRegistry
 
-from mlopt_onnx.arrays import DTYPE_NAMES, WORKING_DTYPES
-from mlopt_onnx.executor import DEFAULT_PROVIDERS, OnnxExecutor
-from mlopt_onnx.lower import lower_ir
-from mlopt_onnx.opmap import ONNX_BINDINGS
-from mlopt_onnx.report import OnnxVerifyReport, verify_module
+from kit_onnx.arrays import DTYPE_NAMES, WORKING_DTYPES
+from kit_onnx.executor import DEFAULT_PROVIDERS, OnnxExecutor
+from kit_onnx.lower import lower_ir
+from kit_onnx.opmap import ONNX_BINDINGS
+from kit_onnx.report import OnnxVerifyReport, verify_module
 
 __all__ = ["OnnxSink"]
 
@@ -155,7 +155,7 @@ class OnnxSink:
     ) -> Executor:
         """Materialise ``ir`` as an executable ONNX program.
 
-        Raises :class:`~mlopt_onnx.errors.UnsupportedOnnxOpError`
+        Raises :class:`~kit_onnx.errors.UnsupportedOnnxOpError`
         when the program uses an op (or a spelling) the mapping
         cannot express — never a silently narrower graph.
         """

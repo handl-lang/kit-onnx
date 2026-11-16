@@ -14,7 +14,7 @@ functions, ``matmul`` / ``linear`` / ``conv``, the product structure
 ``flip``), the reductions, ``softmax`` / ``log_softmax``, the
 activations, the normalizations, and the dtype casts.  Everything
 else is *refused*: an op with no entry raises
-:class:`~mlopt_onnx.errors.UnsupportedOnnxOpError`, and so does a
+:class:`~kit_onnx.errors.UnsupportedOnnxOpError`, and so does a
 mapped op in a spelling ONNX cannot express.
 
 Why a subset is the honest answer rather than a shortfall: the
@@ -56,11 +56,11 @@ import numpy as np
 from mlopt_core.ir import Op
 from onnx import numpy_helper
 
-from mlopt_onnx.arrays import DTYPE_NAMES, numpy_to_onnx_type
-from mlopt_onnx.errors import UnsupportedOnnxOpError
+from kit_onnx.arrays import DTYPE_NAMES, numpy_to_onnx_type
+from kit_onnx.errors import UnsupportedOnnxOpError
 
 if TYPE_CHECKING:
-    from mlopt_onnx.lower import GraphBuilder
+    from kit_onnx.lower import GraphBuilder
 
 __all__ = ["ONNX_BINDINGS", "OnnxBuilder"]
 
@@ -248,7 +248,7 @@ def _pack(b: GraphBuilder, term: Op, ins: list[str]) -> str:
     """``pack`` — the multi-output root, refused as a *value*.
 
     ONNX is natively multi-output: the pairing lowers to the graph's
-    output list (see :meth:`mlopt_onnx.lower.GraphBuilder.build`),
+    output list (see :meth:`kit_onnx.lower.GraphBuilder.build`),
     not to a node, and ONNX has no tuple value.  The entry exists so
     ``supported_ops`` admits ``pack`` — extraction must be able to
     price a multi-output program — and so a *nested* pack, which has

@@ -19,7 +19,7 @@ import numpy as np
 import onnx
 import onnxruntime as ort
 
-from mlopt_onnx.arrays import ort_type_to_numpy, to_numpy
+from kit_onnx.arrays import ort_type_to_numpy, to_numpy
 
 __all__ = ["OnnxExecutor"]
 
@@ -36,7 +36,7 @@ class OnnxExecutor:
     Parameters
     ----------
     model : onnx.ModelProto
-        The artifact :func:`mlopt_onnx.lower.lower_ir` produced.
+        The artifact :func:`kit_onnx.lower.lower_ir` produced.
     providers : tuple[str, ...]
         onnxruntime execution providers, in preference order.
     intra_op_threads : int
@@ -100,7 +100,7 @@ class OnnxExecutor:
         """Run the graph on positional inputs ``xs``.
 
         Inputs are converted to NumPy and cast to the dtype the graph
-        declares for that input (see :mod:`mlopt_onnx.arrays` for the
+        declares for that input (see :mod:`kit_onnx.arrays` for the
         dtype policy).  Returns a single array for a single-output
         graph, a tuple of arrays otherwise.
         """

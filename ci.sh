@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Gate entry — mirrors the Python gates of the sibling split repos
+# (gamekit/eqsat): lint, format, typecheck, then the suite.
+set -euo pipefail
+
+uv sync --group dev
+.venv/bin/ruff check src tests
+.venv/bin/ruff format --check src tests || .venv/bin/ruff format src tests
+.venv/bin/ty check
+.venv/bin/python -m pytest tests/ -q

@@ -8,7 +8,7 @@ touch models that are not torch at all.  It is the peer of
 and importing nothing from the torch family.
 
 What this module does *not* do is as important as what it does.  The
-import is not a parse-and-hope: :mod:`mlopt_onnx.liftmap` is a
+import is not a parse-and-hope: :mod:`kit_onnx.liftmap` is a
 deliberately coherent subset of the ONNX op set, and everything
 outside it — unsupported ops, computed (non-constant) attr-fold
 inputs, non-tensor outputs, opsets outside the pinned window — is
@@ -35,7 +35,7 @@ from typing import Any
 
 from mlopt_core.ir import IR
 
-from mlopt_onnx.lift import (
+from kit_onnx.lift import (
     MAX_OPSET,
     MIN_OPSET,
     LiftResult,

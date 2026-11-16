@@ -2,15 +2,15 @@
 
 :class:`GraphLifter` walks one ``onnx.GraphProto`` and mints the
 equivalent :class:`mlopt_core.ir.IR` term.  It is the whole of the
-source's *lifting* half; :mod:`mlopt_onnx.liftmap` holds the op
-table it dispatches through, and :mod:`mlopt_onnx.source` wraps both
+source's *lifting* half; :mod:`kit_onnx.liftmap` holds the op
+table it dispatches through, and :mod:`kit_onnx.source` wraps both
 behind the ``mlopt_core.ports.Source`` contract.
 
 Design notes that are also the honest caveats:
 
 * **Refuse, never drop.**  An ``op_type`` with no entry in the
   lifting table raises
-  :class:`~mlopt_onnx.errors.UnsupportedOnnxOpError` — the same
+  :class:`~kit_onnx.errors.UnsupportedOnnxOpError` — the same
   error the sink raises for the same reason, in the other direction.
   So does a *mapped* op whose spelling the IR cannot express: a
   ``Slice`` whose bounds arrive as a computed (non-constant) tensor,
@@ -56,11 +56,11 @@ import onnx
 from mlopt_core.ir import IR, Const, Op, Param, TensorType, Var
 from onnx import numpy_helper
 
-from mlopt_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
-from mlopt_onnx.errors import OnnxImportError, UnsupportedOnnxOpError
+from kit_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
+from kit_onnx.errors import OnnxImportError, UnsupportedOnnxOpError
 
 if TYPE_CHECKING:
-    from mlopt_onnx.liftmap import OnnxLifter
+    from kit_onnx.liftmap import OnnxLifter
 
 __all__ = ["GraphLifter", "LiftResult", "lift_model"]
 
@@ -73,7 +73,7 @@ MIN_OPSET = 13
 MAX_OPSET = 21
 
 #: NumPy dtype -> the name the IR records (``to(dtype=...)``) — the
-#: inverse of :data:`mlopt_onnx.arrays.DTYPE_NAMES`.
+#: inverse of :data:`kit_onnx.arrays.DTYPE_NAMES`.
 _NUMPY_TO_NAME: dict[np.dtype, str] = {
     dtype: name for name, dtype in DTYPE_NAMES.items()
 }
@@ -524,7 +524,7 @@ class GraphLifter:
 
 def _lifters() -> Mapping[str, OnnxLifter]:
     """Return the ONNX -> IR op table (imported lazily, like the sink's)."""
-    from mlopt_onnx.liftmap import ONNX_LIFTS
+    from kit_onnx.liftmap import ONNX_LIFTS
 
     return ONNX_LIFTS
 

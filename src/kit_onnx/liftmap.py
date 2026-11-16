@@ -3,7 +3,7 @@
 One entry per ONNX ``op_type``; each value is a *lifter*,
 ``(lifter, node) -> {output_name: term}``, which mints the IR term
 implementing that node and binds its graph outputs.  The table is
-the inverse vocabulary of :mod:`mlopt_onnx.opmap` — where the sink
+the inverse vocabulary of :mod:`kit_onnx.opmap` — where the sink
 spells an IR op *as* ONNX nodes, the lifter reads those nodes back
 into the op, using the same canonical attr spellings
 (``mlopt_core.attrs.ATTR_SCHEMA``) every core reader consumes.
@@ -17,7 +17,7 @@ vocabulary: elementwise arithmetic and transcendental functions,
 ``Tile``), the reductions, ``Softmax``/``LogSoftmax``, the
 activations, the normalizations, and the dtype casts.  Everything
 else is *refused* — an op with no entry raises
-:class:`~mlopt_onnx.errors.UnsupportedOnnxOpError`, and so does a
+:class:`~kit_onnx.errors.UnsupportedOnnxOpError`, and so does a
 mapped op in a spelling the IR cannot express.
 
 Notable declines, each for a stated reason rather than by omission:
@@ -57,10 +57,10 @@ import numpy as np
 import onnx
 from mlopt_core.ir import Const
 
-from mlopt_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
+from kit_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
 
 if TYPE_CHECKING:
-    from mlopt_onnx.lift import GraphLifter
+    from kit_onnx.lift import GraphLifter
 
 __all__ = ["ONNX_LIFTS", "OnnxLifter"]
 

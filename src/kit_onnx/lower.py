@@ -2,14 +2,14 @@
 
 :class:`GraphBuilder` walks one :class:`mlopt_core.ir.IR` term and
 emits an ``onnx.ModelProto``.  It is the whole of the sink's
-*lowering* half; :mod:`mlopt_onnx.opmap` holds the op table it
-dispatches through, and :mod:`mlopt_onnx.sink` wraps both behind the
+*lowering* half; :mod:`kit_onnx.opmap` holds the op table it
+dispatches through, and :mod:`kit_onnx.sink` wraps both behind the
 ``mlopt_core.ports.Sink`` contract.
 
 Design notes that are also the honest caveats:
 
 * **Refuse, never drop.**  An op with no entry in the mapping raises
-  :class:`~mlopt_onnx.errors.UnsupportedOnnxOpError`.  So does a
+  :class:`~kit_onnx.errors.UnsupportedOnnxOpError`.  So does a
   *mapped* op in a spelling the ONNX op cannot express (a missing
   static rank for a ``Transpose`` permutation, an unknown
   ``rounding_mode``, a dynamic ``leaky_relu`` slope that would have
@@ -48,17 +48,17 @@ from mlopt_core.ir import IR, Const, Op, Param, Var
 from mlopt_core.typing import shape_of
 from onnx import helper, numpy_helper
 
-from mlopt_onnx.arrays import (
+from kit_onnx.arrays import (
     DTYPE_NAMES,
     WORKING_DTYPES,
     numpy_to_onnx_type,
     to_numpy,
 )
-from mlopt_onnx.errors import (
+from kit_onnx.errors import (
     OnnxLoweringError,
     UnsupportedOnnxOpError,
 )
-from mlopt_onnx.opmap import ONNX_BINDINGS
+from kit_onnx.opmap import ONNX_BINDINGS
 
 __all__ = ["GraphBuilder", "lower_ir"]
 
@@ -450,7 +450,7 @@ class GraphBuilder:
             graph,
             opset_imports=[helper.make_opsetid("", self.opset)],
             ir_version=self.ir_version,
-            producer_name="mlopt-onnx",
+            producer_name="kit-onnx",
         )
         model = onnx.shape_inference.infer_shapes(
             model, strict_mode=False
