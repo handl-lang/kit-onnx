@@ -22,6 +22,7 @@ dev = [
     "ruff>=0.6",
     "coverage>=7.0",
     "ty>=0.0.84",
+    "import-linter>=2.15",
     # test_onnx_opmap has one torch-oracle parity check
     # (test_pad_with_a_fill_value_matches_torch).
     "torch>=2.0",
@@ -73,3 +74,45 @@ error-on-warning = false
 source = ["kit_onnx"]
 branch = true
 omit = ["*/tests/*"]
+
+[tool.coverage.report]
+# Phase-1 measurement (audit P11-N2): 43.12% total coverage over the
+# package-bound suite — lift.py/liftmap.py/opmap.py are exercised
+# through graphopt's suite via the git dep, not here.  Floor set at
+# the measurement rounded down; tighten, never lower (ratchet
+# convention, same as discoverykit/gamekit/eqsat).
+fail_under = 43
+show_missing = true
+exclude_also = [
+    "if __name__ == ['\"]__main__['\"]:",
+    "if TYPE_CHECKING:",
+    "def __repr__",
+    "raise NotImplementedError",
+    "@overload",
+    "return NotImplemented",
+]
+
+# import-linter: the "leaf by contract" layering, statically
+# (audit P11-N2).  kit_onnx binds only stdlib + mlopt-core +
+# mlopt-dtypes + onnx/onnxruntime/numpy at module level — the
+# torch/mlopt_torch/mlopt_carriers/mlopt_orchestrator/mlopt_host_tensor/
+# mlopt_cuda family is forbidden outright.  torch appears only in
+# tests/ (one opmap parity check), which is outside
+# ``root_packages``; ``include_external_packages`` makes the
+# third-party binds (torch, onnxruntime) visible to the contract.
+[tool.importlinter]
+root_packages = ["kit_onnx"]
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "kit_onnx is a leaf — no torch, no mlopt domain packages"
+type = "forbidden"
+source_modules = ["kit_onnx"]
+forbidden_modules = [
+    "torch",
+    "mlopt_torch",
+    "mlopt_carriers",
+    "mlopt_orchestrator",
+    "mlopt_host_tensor",
+    "mlopt_cuda",
+]

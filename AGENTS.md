@@ -49,7 +49,19 @@ uv sync --group dev
 .venv/bin/ruff check src
 .venv/bin/ruff format --check src
 .venv/bin/ty check
+.venv/bin/lint-imports
+coverage run -m pytest tests/ -q && coverage report -m   # floor in pyproject
 ```
+
+- Coverage floor is `fail_under = 43` in `[tool.coverage.report]`
+  (measured 43.12% on the package-bound suite — `lift.py`/`liftmap.py`/
+  `opmap.py` get their heavy exercise through graphopt's suite via the
+  git dep).  Tighten, never lower.
+- The leaf-by-contract layering is enforced statically by the
+  import-linter `forbidden` contract: `kit_onnx` must not import
+  torch / `mlopt_torch` / `mlopt_carriers` / `mlopt_orchestrator` /
+  `mlopt_host_tensor` / `mlopt_cuda` (torch appears only in `tests/`,
+  outside `root_packages`).
 
 <!-- myco:agent-awareness -->
 

@@ -7,4 +7,8 @@ uv sync --group dev
 .venv/bin/ruff check src
 .venv/bin/ruff format --check src || .venv/bin/ruff format src tests
 .venv/bin/ty check
-.venv/bin/python -m pytest tests/ -q
+.venv/bin/lint-imports
+# Coverage floor enforced via [tool.coverage.report] fail_under —
+# `coverage report` exits non-zero below it.
+.venv/bin/python -m coverage run -m pytest tests/ -q
+.venv/bin/python -m coverage report
