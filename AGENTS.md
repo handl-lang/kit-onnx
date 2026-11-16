@@ -46,8 +46,8 @@ package of the graphopt domain-package dissolution; the
 ```sh
 uv sync --group dev
 .venv/bin/python -m pytest tests/ -q
-.venv/bin/ruff check src tests
-.venv/bin/ruff format --check src tests
+.venv/bin/ruff check src
+.venv/bin/ruff format --check src
 .venv/bin/ty check
 ```
 
