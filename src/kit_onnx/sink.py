@@ -21,9 +21,9 @@ from collections.abc import Mapping
 from typing import Any
 
 import onnx
-from mlopt_core.ir import IR
 from mlopt_core.ops import OpTable
 from mlopt_core.ports import Executor, ExecutorSpec, OpRegistry
+from mlopt_core.term import IR
 
 from kit_onnx.arrays import DTYPE_NAMES, WORKING_DTYPES
 from kit_onnx.executor import DEFAULT_PROVIDERS, OnnxExecutor

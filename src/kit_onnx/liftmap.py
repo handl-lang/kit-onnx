@@ -55,7 +55,7 @@ from typing import TYPE_CHECKING, Any
 
 import numpy as np
 import onnx
-from mlopt_core.ir import Const
+from mlopt_core.term import Const
 
 from kit_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
 

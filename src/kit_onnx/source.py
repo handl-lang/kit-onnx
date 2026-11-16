@@ -33,7 +33,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from mlopt_core.ir import IR
+from mlopt_core.term import IR
 
 from kit_onnx.lift import (
     MAX_OPSET,

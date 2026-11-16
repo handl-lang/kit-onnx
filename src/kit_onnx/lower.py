@@ -1,6 +1,6 @@
 """IR -> ONNX graph lowering — ADR 0006, direction 1.
 
-:class:`GraphBuilder` walks one :class:`mlopt_core.ir.IR` term and
+:class:`GraphBuilder` walks one :class:`mlopt_core.term.IR` term and
 emits an ``onnx.ModelProto``.  It is the whole of the sink's
 *lowering* half; :mod:`kit_onnx.opmap` holds the op table it
 dispatches through, and :mod:`kit_onnx.sink` wraps both behind the
@@ -44,7 +44,7 @@ from typing import Any
 import numpy as np
 import onnx
 from mlopt_core.attrs import ATTR_SCHEMA, attr_of
-from mlopt_core.ir import IR, Const, Op, Param, Var
+from mlopt_core.term import IR, Const, Op, Param, Var
 from mlopt_core.typing import shape_of
 from onnx import helper, numpy_helper
 

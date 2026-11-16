@@ -53,7 +53,7 @@ from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
-from mlopt_core.ir import Op
+from mlopt_core.term import Op
 from onnx import numpy_helper
 
 from kit_onnx.arrays import DTYPE_NAMES, numpy_to_onnx_type

@@ -1,7 +1,7 @@
 """ONNX graph -> IR lifting — ADR 0006, direction 2.
 
 :class:`GraphLifter` walks one ``onnx.GraphProto`` and mints the
-equivalent :class:`mlopt_core.ir.IR` term.  It is the whole of the
+equivalent :class:`mlopt_core.term.IR` term.  It is the whole of the
 source's *lifting* half; :mod:`kit_onnx.liftmap` holds the op
 table it dispatches through, and :mod:`kit_onnx.source` wraps both
 behind the ``mlopt_core.ports.Source`` contract.
@@ -53,7 +53,7 @@ from typing import TYPE_CHECKING, Any, NoReturn
 
 import numpy as np
 import onnx
-from mlopt_core.ir import IR, Const, Op, Param, TensorType, Var
+from mlopt_core.term import IR, Const, Op, Param, TensorType, Var
 from onnx import numpy_helper
 
 from kit_onnx.arrays import DTYPE_NAMES, ONNX_TYPE_NAMES
