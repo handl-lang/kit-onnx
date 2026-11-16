@@ -4,7 +4,7 @@ ADR 0006's second stage: ONNX graphs *in*.  ``OnnxSource`` implements
 the ``Source`` port — ``model -> (IR, leaves)`` — over an
 ``onnx.ModelProto`` (or a ``.onnx`` path), letting the optimizer
 touch models that are not torch at all.  It is the peer of
-``mlopt_torch.adapters.TorchSource``, driven through the same port
+``kit_torch.adapters.TorchSource``, driven through the same port
 and importing nothing from the torch family.
 
 What this module does *not* do is as important as what it does.  The

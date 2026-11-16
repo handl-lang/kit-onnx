@@ -22,7 +22,7 @@ core have to move?" is the other half.
     ...                 input_dtypes=source.input_dtypes)  # +SKIP
     >>> executor = sink.lower(ir, leaves)    # doctest: +SKIP
 
-Nothing here imports torch, ``mlopt_torch``, ``kit_carriers`` or
+Nothing here imports torch, ``kit_torch``, ``kit_carriers`` or
 ``mlopt_orchestrator``: the ONNX backend is a *peer* of the torch
 one, reachable through the same ports and depending only on
 ``mlopt_core``.

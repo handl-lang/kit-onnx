@@ -7,7 +7,7 @@ adapter already implements.  The sink declares its op surface
 programs against each other in its own runtime.
 
 What this module does *not* do is as important as what it does.  It
-imports no torch, no ``mlopt_torch``, no ``kit_carriers``, no
+imports no torch, no ``kit_torch``, no ``kit_carriers``, no
 ``mlopt_orchestrator``: the ONNX backend is a peer of the torch one,
 not a layer on top of it.  ``mlopt_core.cost.backend_cost`` prices
 extraction against :attr:`supported_ops`, so the search only selects

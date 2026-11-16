@@ -3,7 +3,7 @@
 ``Sink.verify`` runs a reference and an optimized executable in *the
 sink's* runtime; for the ONNX sink that runtime is ``onnxruntime``
 and the comparison is NumPy.  The metric is deliberately the one
-``mlopt_torch.report`` already uses — ``max_rel = max|ref - out| /
+``kit_torch.report`` already uses — ``max_rel = max|ref - out| /
 (max|ref| + 1e-8)`` with ``passed = max_rel < rtol`` — so a delivery
 gate means the same thing whichever backend lowered it.
 
@@ -68,7 +68,7 @@ def verify_equiv(
 ) -> OnnxVerifyReport:
     """Compare two already-computed ONNX outputs.
 
-    Gate semantics mirror ``mlopt_torch.report.verify_equiv`` (not
+    Gate semantics mirror ``kit_torch.report.verify_equiv`` (not
     ``numpy.allclose``'s elementwise ``atol + rtol * |ref|``):
 
     * ``max_rel = max|ref - out| / (max|ref| + 1e-8)``

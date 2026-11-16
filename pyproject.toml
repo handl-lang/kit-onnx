@@ -95,7 +95,7 @@ exclude_also = [
 # import-linter: the "leaf by contract" layering, statically
 # (audit P11-N2).  kit_onnx binds only stdlib + mlopt-core +
 # mlopt-dtypes + onnx/onnxruntime/numpy at module level — the
-# torch/mlopt_torch/kit_carriers/mlopt_orchestrator/mlopt_host_tensor/
+# torch/kit_torch(+mlopt_torch)/kit_carriers/mlopt_orchestrator/mlopt_host_tensor/
 # kit_cuda family is forbidden outright.  torch appears only in
 # tests/ (one opmap parity check), which is outside
 # ``root_packages``; ``include_external_packages`` makes the
@@ -110,6 +110,7 @@ type = "forbidden"
 source_modules = ["kit_onnx"]
 forbidden_modules = [
     "torch",
+    "kit_torch",
     "mlopt_torch",
     "kit_carriers",
     "mlopt_orchestrator",

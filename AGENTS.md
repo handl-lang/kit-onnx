@@ -27,12 +27,12 @@ package of the graphopt domain-package dissolution; the
   tests (`test_onnx_sink.py`, `test_onnx_source.py`,
   `test_onnx_liftmap.py`, `test_onnx_codec_drift.py`,
   `test_dtype_registry.py`) stayed in graphopt — they exercise
-  `kit_onnx` *through* `mlopt_torch`/`mlopt_orchestrator`/
+  `kit_onnx` *through* `kit_torch`/`mlopt_orchestrator`/
   `mlopt_host_tensor` and pin this repo as a git dep.
 
 ## Contracts
 
-- **Leaf by contract** — no torch, no `mlopt_torch`, no
+- **Leaf by contract** — no torch, no `kit_torch`, no
   `kit_carriers`, no `mlopt_orchestrator` imports; the
   `onnxruntime` boundary is the only external engine.
 - Substrate deps: `mlopt-core`, `mlopt-dtypes` (handl-lang/eqsat,
@@ -59,7 +59,7 @@ coverage run -m pytest tests/ -q && coverage report -m   # floor in pyproject
   git dep).  Tighten, never lower.
 - The leaf-by-contract layering is enforced statically by the
   import-linter `forbidden` contract: `kit_onnx` must not import
-  torch / `mlopt_torch` / `kit_carriers` / `mlopt_orchestrator` /
+  torch / `kit_torch` / `kit_carriers` / `mlopt_orchestrator` /
   `mlopt_host_tensor` / `mlopt_cuda` (torch appears only in `tests/`,
   outside `root_packages`).
 
