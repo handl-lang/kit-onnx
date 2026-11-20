@@ -7,6 +7,7 @@ name = "kit-onnx"
 version = "0.1.0"
 description = "ONNX backend for the mlopt game (ADR 0006): mlopt IR <-> ONNX graph — OnnxSink exports, OnnxSource imports, both verified through onnxruntime. Split from handl-lang/graphopt packages/mlopt-onnx (P3 Step D-1)."
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
     "mlopt-core",

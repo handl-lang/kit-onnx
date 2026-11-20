@@ -1,8 +1,6 @@
 # kit-onnx
 
-The ONNX backend for the mlopt game (ADR 0006), split out of
-`handl-lang/graphopt` (`packages/mlopt-onnx`) in P3 Step D-1 and
-renamed `mlopt-onnx` → `kit-onnx` / `mlopt_onnx` → `kit_onnx`.
+The ONNX backend for the mlopt game (ADR 0006).
 
 `kit_onnx` implements the `mlopt_core.ports` `Sink`/`Source` ports over
 `onnx` + `onnxruntime`: `OnnxSink` lowers mlopt IR to a runnable ONNX
@@ -14,7 +12,7 @@ It is a **leaf**: it depends on `mlopt-core` + `mlopt-dtypes`
 stack — no torch, no `kit_torch`, no `kit_carriers`, no
 `mlopt_orchestrator`.
 
-## Install
+## Develop
 
 ```sh
 uv sync --group dev
@@ -32,7 +30,12 @@ Substrate pins (`mlopt-core`, `mlopt-dtypes`) resolve from
 ## Verify
 
 ```sh
-.venv/bin/python -m pytest tests/ -q
-.venv/bin/ruff check src tests
-.venv/bin/ty check
+uv run scripts/gate.py --coverage   # pytest → ruff → ty → lint-imports → coverage floor
 ```
+
+`scripts/gate.py` is a stdlib runner over the dev toolchain; `ci.sh`
+is the gate entry.
+
+## License
+
+MIT.
